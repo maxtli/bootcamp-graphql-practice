@@ -1,0 +1,63 @@
+# Write your query or mutation here
+query getAuthor($input:authorNameInput!) {
+  authors {
+    books {
+      title
+    }
+  }
+  publishers {
+    name
+    books {
+      title
+    }
+  }
+	author(input:$input) {
+    firstName
+    lastName
+    address {
+      street
+      city
+      state
+      zip
+    }
+    books {
+      title
+      publisher {
+        name
+        phone
+        address {
+          city
+          street
+        }
+        books {
+          title
+          author {
+            firstName
+            lastName
+          }
+        }
+      }
+    }
+  }
+}
+
+{
+  "input": {
+  	"firstName": "Durward",
+    "lastName": "Farrell"
+	}
+}
+{
+  "input": {
+    "name": {
+      "firstName": "My New",
+      "lastName": "New Author"
+    },
+    "address": {
+      "street": "hello street",
+      "city": "elmo town",
+      "state": "NY",
+      "zip": "10001"
+    }
+	}
+}

@@ -69,6 +69,7 @@ const startServer = async () => {
 
   server.listen(config.port, () => {
     httpServerListening = true
+    console.log(graphqlServer.graphqlPath)
     console.log(`🚀  Server ready at http://localhost:${config.port}${graphqlServer.graphqlPath}`)
   })
 }

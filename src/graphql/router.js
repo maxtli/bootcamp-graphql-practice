@@ -10,6 +10,7 @@ const schema = makeExecutableSchema({
 })
 
 const initializeGraphqlRouter = app => {
+  console.log('hi')
   const server = new ApolloServer({
     schema,
     context,
