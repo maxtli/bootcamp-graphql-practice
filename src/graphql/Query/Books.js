@@ -4,7 +4,7 @@ const Publisher = require('../../models/Publisher')
 
 const books = async () => {
     try {
-        return await Book.query()
+        return await Book.query().select('title', 'language', 'numPages as pages', 'datePublished as publishDate', 'authorId', 'publisherId')
     } catch (err) {
         console.log(err)
     }
@@ -12,11 +12,14 @@ const books = async () => {
 
 const author = async ({ authorId }, params, context) => {
     try {
-        return await Author.query()
+        //return {firstName: authorId, lastName: 'hi'}
+        //console.log(JSON.stringify(cool))
+        return await Author.query().where('id', authorId).first()//.findOne('id', authorId)
         //.select('id', fn('concat', 'firstName', 'lastName'),'age', 'email', 'numBooksPublished', 'createdAt')
-        .findOne('id', authorId)
+        
     } catch (err) {
         console.log(err)
+        return {firstName: 'Too many database connections :(', lastName: 'Too many database connections :('}
     }
 }
 
@@ -27,6 +30,7 @@ const publisher = async ({ publisherId }, params, context) => {
         .findOne('id', publisherId)
     } catch (err) {
         console.log(err)
+        return {firstName: 'Too many database connections :(', lastName: 'Too many database connections :('}
     }
 }
 
